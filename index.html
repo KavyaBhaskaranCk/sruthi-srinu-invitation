@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f3eb" />
+  <meta name="description" content="Wedding invitation for Sruthi S. and Srinu Rameshan, 13 December 2026." />
+  <title>Sruthi &amp; Srinu — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=motion-20261108-9" />
+</head>
+<body class="cover-page">
+  <main>
+    <section class="cover" aria-label="Wedding invitation cover">
+      <div class="ambient-leaves" aria-hidden="true"></div>
+      <div class="cover-frame" aria-hidden="true"></div>
+      <span class="corner corner-tl" aria-hidden="true">❧</span><span class="corner corner-tr" aria-hidden="true">❧</span>
+      <span class="corner corner-bl" aria-hidden="true">❧</span><span class="corner corner-br" aria-hidden="true">❧</span>
+      <span class="hanging h-left" aria-hidden="true"></span><span class="hanging h-right" aria-hidden="true"></span>
+      <div class="cover-content">
+        <p class="cover-label">WEDDING INVITATION</p>
+        <svg class="temple-mark" viewBox="0 0 64 54" role="img" aria-label="Temple"><path d="M8 45h48M14 41h36M19 37h26M24 33h16M29 28h6M32 8l4 6h-8l4-6Zm-8 8h16v5H24zm-4 7h24v5H20zm-4 7h32v5H16zM29 23v-2h6v2M30 45V35h4v10" fill="currentColor"/></svg>
+        <div class="gold-divider"><span></span></div>
+        <div class="cover-monogram">S <i>&amp;</i> S</div>
+        <h1>Sruthi <i>&amp;</i> Srinu</h1>
+        <div class="gold-divider lower"><span></span></div>
+        <p class="cover-weekday">Sunday</p>
+        <p class="cover-date"><b>◆</b> 13 DECEMBER 2026 <b>◆</b></p>
+        <div class="rings" aria-hidden="true">◎◎</div>
+        <a class="seal-link" href="invitation.html" aria-label="Open invitation">
+          <span class="seal"><span>S &amp; S</span></span>
+          <span class="seal-caption">OPEN<br />INVITATION</span>
+        </a>
+      </div>
+    </section>
+  </main>
+  <script>
+    const coverDecorations = [
+      ['❧', 'falling-leaf'], ['✧', 'falling-spark'], ['❦', 'falling-leaf'],
+      ['❧', 'falling-leaf'], ['✥', 'falling-spark'], ['❧', 'falling-leaf'],
+      ['❀', 'falling-petal'], ['✧', 'falling-spark'],
+    ];
+    const coverLeaves = document.querySelector('.cover .ambient-leaves');
+    coverDecorations.forEach(([glyph, kind], index) => {
+      const leaf = document.createElement('span');
+      leaf.className = kind;
+      leaf.textContent = glyph;
+      const sway = index % 2 ? 1 : -1;
+      const duration = 11 + (index % 6);
+      leaf.style.setProperty('--fall-left', `${5 + ((index * 29) % 90)}%`);
+      leaf.style.setProperty('--fall-duration', `${duration}s`);
+      leaf.style.setProperty('--fall-delay', `-${(index * 5) % duration}s`);
+      leaf.style.setProperty('--fall-opacity', `${0.25 + (index % 3) * 0.06}`);
+      leaf.style.setProperty('--fall-sway-one', `${sway * (14 + index * 3)}px`);
+      leaf.style.setProperty('--fall-sway-two', `${-sway * (12 + index * 2)}px`);
+      leaf.style.setProperty('--fall-sway-three', `${sway * (18 + index * 2)}px`);
+      coverLeaves.appendChild(leaf);
+    });
+    document.querySelectorAll('.cover-content').forEach((sequence) => {
+      sequence.addEventListener('animationend', (event) => {
+        if (event.target !== sequence && event.animationName.includes('line-in')) {
+          event.target.style.animation = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
